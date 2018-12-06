@@ -12,16 +12,15 @@ import training.learn.CourseManager
 import training.learn.LearnBundle
 import training.learn.interfaces.Module
 import training.ui.LearnIcons
+import training.ui.LearnToolWindow
 import training.ui.UISettings
 import training.util.DataLoader
 import training.util.createBalloon
 import java.awt.*
+import java.awt.event.ActionEvent
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
-import javax.swing.Box
-import javax.swing.BoxLayout
-import javax.swing.JPanel
-import javax.swing.JTextPane
+import javax.swing.*
 import javax.swing.border.EmptyBorder
 import javax.swing.text.BadLocationException
 import javax.swing.text.SimpleAttributeSet
@@ -30,7 +29,7 @@ import javax.swing.text.StyleConstants
 /**
  * Created by karashevich on 26/06/15.
  */
-class ModulesPanel : JPanel() {
+class ModulesPanel(val learnToolWindow: LearnToolWindow) : JPanel() {
 
     private var lessonPanel: JPanel? = null
 
@@ -88,6 +87,22 @@ class ModulesPanel : JPanel() {
             CourseManager.instance.initXmlModules()
             module2linklabel!!.clear()
         }
+
+        lessonPanel!!.add(JButton().apply {
+            action = object : AbstractAction() {
+                override fun actionPerformed(actionEvent: ActionEvent) {
+                    learnToolWindow.changeLanguage()
+                }
+            }
+            margin = Insets(0, 0, 0, 0)
+            isFocusable = true
+            isVisible = true
+            isSelected = true
+            isEnabled = true
+            isOpaque = false
+            text = "Change language"
+        })
+
         for (module in modules) {
             if (module.lessons.size == 0) continue
             val moduleHeader = JPanel()
