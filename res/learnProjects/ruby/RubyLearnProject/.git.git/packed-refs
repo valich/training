@@ -1,0 +1,15 @@
+# pack-refs with: peeled fully-peeled 
+ad903b9c911bacaa3b8fd63b81d14c83113bdd6c refs/remotes/origin/account-activation
+8e306e3c156c1857b2be1c6c77eb9c6966b4e9ba refs/remotes/origin/advanced-login
+aef14a7beb43bdd7cd5f500a82f8ef06d932a537 refs/remotes/origin/basic-login
+e89da7f9ed2a6b3112d819c0422fe56d20760e72 refs/remotes/origin/filling-in-layout
+852e7a72d3e3f0109e044d63e47b28112443f177 refs/remotes/origin/following-users
+da12a48d9e9db604b0dc3224816f840104c2b4c6 refs/remotes/origin/master
+f0fc0111dfc0bab31792e98474e2d482112276c0 refs/remotes/origin/modeling-users
+25df934c7f974b02f4ed94e266fd0145db3addd8 refs/remotes/origin/password-reset
+08a466b0406dd476e57c1a6929ee10a7a2e33f61 refs/remotes/origin/rails-flavored-ruby
+82254d8612fd6027992a39e0e60b277536a815ad refs/remotes/origin/sign-up
+6c255b27f7c7935dd9b04f28d3a249af8618242f refs/remotes/origin/test-micro
+2e8c4b34d07abf9ba0bd8e2b3b694c1f86f1d4a7 refs/remotes/origin/updating-users
+40300737ad56069c5baad6ee366703bd12cfdc39 refs/remotes/origin/user-microposts
+35b1ceb21e4581f0afb3a981bd82cfafaa3d3012 refs/remotes/origin/will-paginate-fix

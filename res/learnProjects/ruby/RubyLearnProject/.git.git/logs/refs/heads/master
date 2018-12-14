@@ -1,0 +1,6 @@
+0000000000000000000000000000000000000000 da12a48d9e9db604b0dc3224816f840104c2b4c6 Alexey Merkulov <alexey.merkulov@jetbrains.com> 1544691560 +0300	clone: from https://bitbucket.org/railstutorial/sample_app_4th_ed.git
+da12a48d9e9db604b0dc3224816f840104c2b4c6 97e2a1fae982d167476aee70a770e9841c5e2b88 Alexey Merkulov <alexey.merkulov@jetbrains.com> 1545065042 +0300	commit: Fix rights to default
+97e2a1fae982d167476aee70a770e9841c5e2b88 5d40af5f3d3cd2c0433198eb499cd62bd52acc64 Alexey Merkulov <alexey.merkulov@jetbrains.com> 1545065068 +0300	commit (amend): Fix rights to default
+5d40af5f3d3cd2c0433198eb499cd62bd52acc64 3d224ed2f813fdd07e2e661adac1998b09158cee Alexey Merkulov <alexey.merkulov@jetbrains.com> 1545065092 +0300	commit: added IDEA directory
+3d224ed2f813fdd07e2e661adac1998b09158cee 5d40af5f3d3cd2c0433198eb499cd62bd52acc64 Alexey Merkulov <alexey.merkulov@jetbrains.com> 1545065915 +0300	reset: moving to 5d40af5f3d3cd2c0433198eb499cd62bd52acc64
+5d40af5f3d3cd2c0433198eb499cd62bd52acc64 d9afbcf228c1cb3a35ea623b0972a0f29bf37620 Alexey Merkulov <alexey.merkulov@jetbrains.com> 1545067149 +0300	commit: Added .idea into ignores
