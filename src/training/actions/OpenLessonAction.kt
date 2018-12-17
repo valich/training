@@ -309,8 +309,6 @@ class OpenLessonAction : AnAction() {
   //
   @Throws(IOException::class)
   private fun getFileInLearnProject(lesson: Lesson): VirtualFile {
-
-    if (lesson.module == null) throw Exception("Error: cannot create learning file in project for a lesson (${lesson.name}) without module (or module is null)")
     val function = object : Computable<VirtualFile> {
 
       override fun compute(): VirtualFile {
@@ -320,10 +318,7 @@ class OpenLessonAction : AnAction() {
         val languageByID = findLanguageByID(myLanguage)
         val extensionFile = languageByID!!.associatedFileType!!.defaultExtension
 
-        var fileName = "Test.$extensionFile"
-        if (lesson.module != null) {
-          fileName = lesson.module!!.sanitizedName + "." + extensionFile
-        }
+        val fileName = lesson.module.sanitizedName + "." + extensionFile
 
         var lessonVirtualFile: VirtualFile? = null
         for (file in ProjectRootManager.getInstance(learnProject).contentSourceRoots) {
@@ -347,7 +342,7 @@ class OpenLessonAction : AnAction() {
         }
 
         CourseManager.instance.registerVirtualFile(lesson.module, lessonVirtualFile!!)
-        return lessonVirtualFile!!
+        return lessonVirtualFile
       }
     }
 
