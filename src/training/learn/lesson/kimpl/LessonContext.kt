@@ -12,8 +12,8 @@ class LessonContext(val lesson: KLesson, val editor: Editor, val project: Projec
   fun task(taskContent: TaskContext.() -> Unit) {
     val taskContext = TaskContext(lesson, editor, project)
     taskContext.apply(taskContent)
-    taskContext.checkFutures.forEach { assertTrue(it.get()) }
-    taskContext.triggerFutures.forEach { assertTrue(it.get()) }
+    taskContext.checkFutures.forEach { assert(it.get()) }
+    taskContext.triggerFutures.forEach { assert(it.get()) }
     LessonManager.getInstance(lesson).passExercise()
   }
 
