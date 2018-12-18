@@ -24,7 +24,7 @@ object FileUtils {
     if (!toCopy.isDirectory) {
       return FileUtils.copyFile(toCopy, File(destDir, toCopy.name))
     } else {
-      val newDestDir = File(destDir, toCopy.name)
+      val newDestDir = File(destDir, toCopy.name.replace(".git.git", ".git"))
       if (!newDestDir.exists() && !newDestDir.mkdir()) {
         return false
       }
@@ -47,7 +47,7 @@ object FileUtils {
     while (entries.hasMoreElements()) {
       val entry = entries.nextElement()
       if (entry.name.startsWith(jarConnection.entryName)) {
-        val filename = StringUtils.removeStart(entry.name, jarConnection.entryName)
+        val filename = StringUtils.removeStart(entry.name, jarConnection.entryName).replace(".git.git", ".git")
 
         val f = File(destDir, filename)
         if (!entry.isDirectory) {
