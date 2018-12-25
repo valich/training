@@ -8,6 +8,7 @@ import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.labels.LinkLabel
 import com.intellij.util.containers.BidirectionalMap
 import com.intellij.util.ui.UIUtil
+import training.commands.kotlin.TaskContext
 import training.learn.CourseManager
 import training.learn.LearnBundle
 import training.learn.interfaces.Module
@@ -101,6 +102,17 @@ class ModulesPanel(val learnToolWindow: LearnToolWindow) : JPanel() {
             isEnabled = true
             isOpaque = false
             text = "Change language"
+        })
+
+        lessonPanel!!.add(JCheckBox().apply {
+            addItemListener { e ->  TaskContext.inTestMode = e.stateChange == 1; System.err.println(if (e.stateChange == 1) "checked" else "unchecked" ) }
+            isFocusable = true
+            isVisible = true
+            isSelected = true
+            isEnabled = true
+            isOpaque = false
+            model.isSelected = false
+            text = "Run in test mode"
         })
 
         for (module in modules) {

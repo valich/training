@@ -2,6 +2,10 @@ package training.commands.kotlin
 
 import com.intellij.find.FindManager
 import com.intellij.find.FindResult
+import com.intellij.ide.DataManager
+import com.intellij.openapi.actionSystem.*
+import com.intellij.openapi.actionSystem.ex.ActionManagerEx
+import com.intellij.openapi.actionSystem.ex.ActionUtil
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.application.ModalityState
 import com.intellij.openapi.application.ReadAction
@@ -22,6 +26,7 @@ import training.learn.lesson.LessonManager
 import training.learn.lesson.kimpl.KLesson
 import training.ui.Message
 import java.util.concurrent.CompletableFuture
+import kotlin.concurrent.thread
 
 class TaskContext(val lesson: KLesson, val editor: Editor, val project: Project) {
   val checkFutures: MutableList<CompletableFuture<Boolean>> = mutableListOf()
@@ -75,6 +80,29 @@ class TaskContext(val lesson: KLesson, val editor: Editor, val project: Project)
     val recorder = ActionsRecorder(project, editor.document)
     LessonManager.getInstance(lesson).registerActionsRecorder(recorder)
     this.triggerFutures.add(recorder.futureListActions(actionIds.toList()))
+
+    runActionsInTestMode(actionIds)
+  }
+
+  private fun runActionsInTestMode(actionIds: Array<out String>) {
+    if (inTestMode) {
+      thread(name = "TestLearningPlugin") {
+        val app = ApplicationManager.getApplication()
+        for (actionId in actionIds) {
+          System.err.println("Sleep")
+          Thread.sleep(2000)
+          System.err.println("Action: $actionId")
+          val action = ActionManager.getInstance().getAction(actionId)
+          DataManager.getInstance().dataContextFromFocusAsync.onSuccess { dataContext ->
+            app.invokeAndWait {
+              val event = AnActionEvent.createFromAnAction(action, null, ActionPlaces.UNKNOWN, dataContext)
+              var ed = dataContext.getData(PlatformDataKeys.FILE_EDITOR)
+              performActionDumbAwareWithCallbacks(action, event, dataContext)
+            }
+          }
+        }
+      }
+    }
   }
 
   fun check(check : Check) {
@@ -142,4 +170,18 @@ class TaskContext(val lesson: KLesson, val editor: Editor, val project: Project)
       app.invokeLater({ runnable() }, ModalityState.defaultModalityState())
     }
   }
+
+  companion object {
+    @Volatile var inTestMode : Boolean = false
+
+    //TODO: in 2018.3 it is a part of ActionUtil class
+    private fun performActionDumbAwareWithCallbacks(action: AnAction, e: AnActionEvent, context: DataContext) {
+      val manager = ActionManagerEx.getInstanceEx()
+      manager.fireBeforeActionPerformed(action, context, e)
+      ActionUtil.performActionDumbAware(action, e)
+      manager.fireAfterActionPerformed(action, context, e)
+    }
+  }
 }
+
+
