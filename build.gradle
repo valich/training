@@ -25,7 +25,8 @@ intellij {
     version 'IU-183.5153.4'
     //to check compatibility for Python and Go
     plugins = [
-            'org.jetbrains.plugins.ruby:2018.3.20181220'
+            'org.jetbrains.plugins.ruby:2018.3.20181220',
+            'com.intellij.testGuiFramework:0.9.35@nightly'
     ]
     intellij.updateSinceUntilBuild = false
 }

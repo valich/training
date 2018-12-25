@@ -2,6 +2,7 @@ package training.learn.lesson.ruby
 
 import com.intellij.ide.DataManager
 import com.intellij.openapi.actionSystem.PlatformDataKeys
+import com.intellij.testGuiFramework.framework.GuiTestUtil
 import training.commands.kotlin.TaskContext
 import training.learn.interfaces.Module
 import training.learn.lesson.kimpl.KLesson
@@ -31,7 +32,8 @@ class RubyNavigationLesson(module: Module) : KLesson("Basic Navigation", module,
             DataManager.getInstance().dataContextFromFocusAsync.onSuccess { dataContext ->
               val component = dataContext.getData(PlatformDataKeys.CONTEXT_COMPONENT) ?: return@onSuccess
               if (component is JTextField) {
-
+                GuiTestUtil.typeText("Us")
+                System.err.println("Typed!")
               }
             }
           }
