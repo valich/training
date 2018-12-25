@@ -23,11 +23,11 @@ class LangManager : PersistentStateComponent<LangManager.State> {
   private var myLangSupport: LangSupport? = null
 
   init {
-    if (supportedLanguagesExtensions.size == 1) {
+    //if (supportedLanguagesExtensions.size == 1) {
       val first = supportedLanguagesExtensions.first()
       myLangSupport = first.instance
       myState.languageName = first.language
-    }
+    //}
   }
 
   companion object {
