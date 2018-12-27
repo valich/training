@@ -313,7 +313,7 @@ class OpenLessonAction : AnAction() {
 
       override fun compute(): VirtualFile {
         val learnProject = CourseManager.instance.learnProject!!
-        val sourceRootFile = ProjectRootManager.getInstance(learnProject).contentSourceRoots[0]
+        val sourceRootFile: VirtualFile? = ProjectRootManager.getInstance(learnProject).contentSourceRoots.firstOrNull()
         val myLanguage = lesson.lang
         val languageByID = findLanguageByID(myLanguage)
         val extensionFile = languageByID!!.associatedFileType!!.defaultExtension
@@ -341,14 +341,16 @@ class OpenLessonAction : AnAction() {
         }
         if (lessonVirtualFile == null) {
           try {
-            lessonVirtualFile = sourceRootFile.createChildData(this, fileName)
+            sourceRootFile ?: LOG.warn("sourceRootFile is null, unable to create lesson virtual file")
+            lessonVirtualFile = sourceRootFile?.createChildData(this, fileName)
           } catch (e: IOException) {
             e.printStackTrace()
           }
 
         }
+        lessonVirtualFile ?: throw Exception("Cannot create a virtual file for lesson (${lesson.name})")
 
-        CourseManager.instance.registerVirtualFile(lesson.module, lessonVirtualFile!!)
+        CourseManager.instance.registerVirtualFile(lesson.module, lessonVirtualFile)
         return lessonVirtualFile
       }
     }
@@ -370,7 +372,7 @@ class OpenLessonAction : AnAction() {
       if (!ApplicationManager.getApplication().isUnitTestMode && projectToClose != null)
         if (!NewLearnProjectUtil.showDialogOpenLearnProject(projectToClose))
           return null //if user abort to open lesson in a new Project
-      if (CourseManager.instance.learnProjectPath != null) {
+      if (CourseManager.instance.learnProjectPath != null && CourseManager.instance.learnProject?.name == langSupport.defaultProjectName) {
         try {
           myLearnProject = ProjectManager.getInstance().loadAndOpenProject(CourseManager.instance.learnProjectPath!!)
         } catch (e: Exception) {
