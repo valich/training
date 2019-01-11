@@ -121,17 +121,12 @@ class CourseManager internal constructor() {
 
    * @param project where lesson should be started
    * *
-   * @throws OldJdkException     - if project JDK version is not enough for this module
-   * *
    * @throws InvalidSdkException - if project SDK is not suitable for module
    */
-  @Throws(OldJdkException::class, InvalidSdkException::class, NoSdkException::class, NoJavaModuleException::class)
+  @Throws(InvalidSdkException::class, NoJavaModuleException::class)
   fun checkEnvironment(project: Project) {
     val sdk = ProjectRootManager.getInstance(project).projectSdk
-    if (LangManager.getInstance().getLangSupport().needToCheckSDK()) {
-      val sdkType = sdk?.sdkType ?: throw NoSdkException()
-      LangManager.getInstance().getLangSupport().checkSdkCompatibility(sdk!!, sdkType)
-    }
+    LangManager.getInstance().getLangSupport().checkSdk(sdk)
   }
 
   fun findLesson(lessonName: String): Lesson? {

@@ -25,11 +25,9 @@ class SwiftSupport : AbstractLangSupport() {
     }
     override fun applyToProjectAfterConfigure(): (Project) -> Unit = {
     }
-    override fun checkSdkCompatibility(sdk: Sdk, sdkTypeId: SdkTypeId) {
-    }
-    override fun needToCheckSDK(): Boolean {
-        return false
-    }
+
+    override fun checkSdk(sdk: Sdk?) {}
+
     override fun createProject(projectName: String, projectToClose: Project?): Project? {
         return ProjectUtils.importOrOpenProject("/learnProjects/"+ApplicationNamesInfo.getInstance().fullProductName.toLowerCase() + "_swift/LearnProjectSwift", "LearnProject")
     }

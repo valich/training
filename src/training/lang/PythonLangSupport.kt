@@ -65,13 +65,13 @@ class PythonLangSupport : AbstractLangSupport() {
 
   override fun applyToProjectAfterConfigure(): (Project) -> Unit = {}
 
-  override fun checkSdkCompatibility(sdk: Sdk, sdkTypeId: SdkTypeId) {
-    if (sdkTypeId is PythonSdkType) {
+  override fun checkSdk(sdk: Sdk?) {
+    checkSdkPresence(sdk)
+    if (sdk!!.sdkType is PythonSdkType) {
       if (!isNoOlderThan27(sdk)) throw InvalidSdkException("Please use at least JDK 1.6 or IDEA SDK with corresponding JDK")
     }
     else throw NoSdkException()
   }
-
 
   fun addToSdkList() {
   }

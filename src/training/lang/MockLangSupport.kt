@@ -16,8 +16,8 @@ class MockLangSupport(override val FILE_EXTENSION: String) : AbstractLangSupport
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
-  override fun checkSdkCompatibility(sdk: Sdk, sdkTypeId: SdkTypeId) {
-    throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+  override fun checkSdk(sdk: Sdk?) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
   override fun applyToProjectAfterConfigure(): (Project) -> Unit {
