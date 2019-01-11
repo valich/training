@@ -16,8 +16,6 @@ import training.lang.LangManager
 import training.lang.LangSupport
 import training.learn.exceptons.InvalidSdkException
 import training.learn.exceptons.NoJavaModuleException
-import training.learn.exceptons.NoSdkException
-import training.learn.exceptons.OldJdkException
 import training.learn.interfaces.Lesson
 import training.learn.interfaces.Module
 import training.util.GenModuleXml
@@ -126,7 +124,7 @@ class CourseManager internal constructor() {
   @Throws(InvalidSdkException::class, NoJavaModuleException::class)
   fun checkEnvironment(project: Project) {
     val sdk = ProjectRootManager.getInstance(project).projectSdk
-    LangManager.getInstance().getLangSupport().checkSdk(sdk)
+    LangManager.getInstance().getLangSupport().checkSdk(sdk, project)
   }
 
   fun findLesson(lessonName: String): Lesson? {

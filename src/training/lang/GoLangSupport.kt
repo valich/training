@@ -3,7 +3,6 @@ package training.lang
 import com.intellij.openapi.module.ModuleManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.projectRoots.Sdk
-import com.intellij.openapi.projectRoots.SdkTypeId
 import training.learn.exceptons.NoJavaModuleException
 import training.project.ProjectUtils
 
@@ -22,9 +21,7 @@ class GoLangSupport : AbstractLangSupport() {
   override val FILE_EXTENSION: String
     get() = "go"
 
-  override fun checkSdk(sdk: Sdk?) {}
-
-  override fun applyProjectSdk(project: Project): Unit { }
+  override fun checkSdk(sdk: Sdk?, project: Project) {}
 
   override fun applyToProjectAfterConfigure(): (Project) -> Unit = {}
 

@@ -2,7 +2,6 @@ package training.lang
 
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.projectRoots.Sdk
-import com.intellij.openapi.projectRoots.SdkTypeId
 
 /**
  * @author Sergey Karashevich
@@ -16,7 +15,7 @@ class MockLangSupport(override val FILE_EXTENSION: String) : AbstractLangSupport
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
-  override fun checkSdk(sdk: Sdk?) {
+  override fun checkSdk(sdk: Sdk?, project: Project) {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
@@ -27,10 +26,5 @@ class MockLangSupport(override val FILE_EXTENSION: String) : AbstractLangSupport
   override fun acceptLang(ext: String): Boolean {
     throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
-
-  override fun applyProjectSdk(project: Project) {
-    throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-  }
-
 
 }
